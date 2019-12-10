@@ -1,0 +1,82 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-allopen'
+
+android {
+    compileSdkVersion Releases.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion Releases.minSdkVersion
+        targetSdkVersion Releases.targetSdkVersion
+        versionCode Releases.versionCode
+        versionName Releases.versionName
+
+        buildConfigField("String", "API_KEY", movieApiKey)
+        buildConfigField("String", "MOVIE_URL", movieApiUrl)
+        buildConfigField("String", "IMAGE_URL", movieImageUrl)
+    }
+
+    buildTypes {
+        debug {
+
+        }
+        release {
+            minifyEnabled false
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    sourceSets.each {
+        it.java.srcDirs += "src/$it.name/kotlin"
+    }
+
+    testOptions {
+        unitTests.all {
+            testLogging.events = ["passed", "skipped", "failed"]
+        }
+    }
+}
+
+dependencies {
+    implementation Dependencies.kotlin
+    implementation Android.design
+
+    //di
+    implementation Dagger.dagger
+    implementation Dagger.android
+    kapt Dagger.compiler
+    kapt Dagger.processor
+
+    //deeplink
+    implementation Misc.deeplink
+    kapt Misc.deeplinkProcessor
+
+    //testing
+    implementation Testing.espressoIdleResources
+
+    testImplementation Testing.jUnit
+    testImplementation Testing.mockito
+    testImplementation Testing.mockKtRunner
+    testImplementation Testing.androidX
+    testImplementation Coroutines.core
+    testImplementation Coroutines.android
+    testImplementation Coroutines.test
+    testImplementation Retrofit.mockWebServer
+    androidTestImplementation Testing.testRunner
+    androidTestImplementation Testing.espresso
+    androidTestImplementation Testing.espressoContrib
+    androidTestImplementation Testing.runner
+    androidTestImplementation Testing.rules
+    androidTestImplementation Testing.core
+    androidTestImplementation Testing.espressoIdleResources
+    androidTestImplementation Testing.extJunit
+    androidTestImplementation Testing.extTruth
+
+    testImplementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+}
