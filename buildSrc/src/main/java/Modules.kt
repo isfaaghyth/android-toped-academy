@@ -8,7 +8,7 @@ object Modules {
     val app = ":app"
 
     //feature
-    val movie = ":feature:movie"
+    //TODO
 
     //libraries
     val network = ":libraries:network"
