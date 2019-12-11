@@ -20,18 +20,4 @@ object MovieDetailMapper {
         )
     }
 
-    fun mapFromTVShow(tv: TVShow): MovieDetail {
-        return MovieDetail(
-            tv.id,
-            tv.movieId,
-            tv.title,
-            tv.posterUrl(),
-            tv.overview,
-            tv.bannerUrl(),
-            tv.voteCount,
-            tv.voteAverage,
-            tv.releaseDate
-        )
-    }
-
 }

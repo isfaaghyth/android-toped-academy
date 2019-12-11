@@ -47,16 +47,6 @@ dependencies {
     implementation Dependencies.kotlin
     implementation Android.design
 
-    //di
-    implementation Dagger.dagger
-    implementation Dagger.android
-    kapt Dagger.compiler
-    kapt Dagger.processor
-
-    //deeplink
-    implementation Misc.deeplink
-    kapt Misc.deeplinkProcessor
-
     //testing
     implementation Testing.espressoIdleResources
 
